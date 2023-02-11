@@ -10,7 +10,7 @@ def welcome():
   
 # defining the function which will make the prediction using 
 # the data which the user inputs
-def prediction(km_driven, mileage, max_power, age, Diesel, Electric, LPG, Petrol, Manual, seats5, more5seats):  
+def prediction(km_driven, mileage,  max_power, age, Diesel, Electric, LPG, Petrol, Manual, seats5, more5seats):  
    
     prediction = classifier.predict(
         [[km_driven, mileage, max_power, age, Diesel, Electric, LPG, Petrol, Manual, seats5, more5seats]])
@@ -27,7 +27,7 @@ def main():
     # the font and background color, the padding and the text to be displayed
     html_temp = """
     <div style ="background-color:yellow;padding:13px">
-    <h1 style ="color:black;text-align:center;">Classifier ML App </h1>
+    <h1 style ="color:black;text-align:center;">ML App </h1>
     </div>
     """
       
@@ -37,48 +37,55 @@ def main():
       
     # the following lines create text boxes in which the user can enter 
     # the data required to make the prediction
-    km_driven = st.slider("km_driven",0,1000000000,0)
-    mileage = st.slider("mileage", 0,40,0)
-    max_power = st.slider("max_power", 0,200,0)
-    age = st.slider("age", 0,20,0)
-    Diesel = st.radio("Fuel", ('Diesel', 'Petrol'))
-    Electric = st.radio("Electric", ('Yes', 'No'))
-    LPG = st.radio("LPG", ('Yes', 'No'))
-    Petrol = st.radio("Petrol", ('Yes', 'No'))
-    Manual = st.radio("Manual", ('Yes', 'No'))
-    seats5 = st.radio("seats5", ('Yes', 'No'))
+    km_driven = st.text_input("km_driven")
+    mileage = st.text_input("mileage")
+    max_power = st.text_input("max_power(in horse power)")
+    age = st.text_input("age(in years)")
+    st.subheader("choose your vehicle properties")
+    a = st.checkbox('Diesel')
+    if a:
+        Diesel = 1.0
+    else:
+        Diesel = 0.0
+    a = st.checkbox('Electric')
+    if a:
+        Electric = 1.0
+    else:
+        Electric = 0.0
+    a = st.checkbox('LPG')
+    if a:
+        LPG = 1.0
+    else:
+        LPG = 0.0
+    a = st.checkbox('Petrol')
+    if a:
+        Petrol = 1.0
+    else:
+        Petrol = 0.0
+    a = st.checkbox('Manual')
+    if a:
+        Manual = 1.0
+    else:
+        Manual = 0.0
+    a = st.checkbox('seats5')
+    if a:
+        seats5 = 1.0
+    else:
+        seats5 = 0.0
+    a = st.checkbox(' more than 5seats')
+    if a:
+        more5seats = 1.0
+    else:
+        more5seats = 0.0
+        
     result =""
       
-    if Diesel == "Yes":
-        Diesel=1
-        Petrol=0
-    else:
-        Diesel=0
-        Petrol=1
-    if Electric == "Yes":
-        Electric=1
-    else:
-        Electric=0
-    if LPG == "Yes":
-        LPG=1
-    else:
-        LPG=0
-    if Manual == "Yes":
-        Manual=1
-    else:
-        Manual=0
-    if seats5 == "Yes":
-        seats5=1
-        more5seats=0
-    else:
-        seats5=0
-        more5seats=1
     # the below line ensures that when the button called 'Predict' is clicked, 
     # the prediction function defined above is called to make the prediction 
     # and store it in the variable result
     if st.button("Predict"):
-        result = prediction(float(km_driven), float(mileage), float(max_power), float(age), float(Diesel), float(Electric), float(LPG), float(Petrol), float(Manual), float(seats5), float(more5seats))
-    st.success('The output is {}'.format(result))
+        result = prediction( float(km_driven), float(mileage), float(max_power), float(age), float(Diesel), float(Electric), float(LPG), float(Petrol), float(Manual), float(seats5), float(more5seats))
+    st.success('The output(in lakhs) is {}'.format(result))
      
 if __name__=='__main__':
     main()
