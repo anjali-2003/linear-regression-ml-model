@@ -41,19 +41,20 @@ def main():
     mileage = st.slider("mileage", 0,40,0)
     max_power = st.slider("max_power", 0,200,0)
     age = st.slider("age", 0,20,0)
-    Diesel = st.radio("Diesel", ('Yes', 'No'))
+    Diesel = st.radio("Fuel", ('Diesel', 'Petrol'))
     Electric = st.radio("Electric", ('Yes', 'No'))
     LPG = st.radio("LPG", ('Yes', 'No'))
     Petrol = st.radio("Petrol", ('Yes', 'No'))
     Manual = st.radio("Manual", ('Yes', 'No'))
     seats5 = st.radio("seats5", ('Yes', 'No'))
-    more5seats = st.radio(">5seats", ('Yes', 'No'))
     result =""
       
     if Diesel == "Yes":
         Diesel=1
+        Petrol=0
     else:
         Diesel=0
+        Petrol=1
     if Electric == "Yes":
         Electric=1
     else:
@@ -62,22 +63,16 @@ def main():
         LPG=1
     else:
         LPG=0
-    if Petrol == "Yes":
-        Petrol=1
-    else:
-        Petrol=0
     if Manual == "Yes":
         Manual=1
     else:
         Manual=0
     if seats5 == "Yes":
         seats5=1
+        more5seats=0
     else:
         seats5=0
-    if more5seats == "Yes":
         more5seats=1
-    else:
-        more5seats=0
     # the below line ensures that when the button called 'Predict' is clicked, 
     # the prediction function defined above is called to make the prediction 
     # and store it in the variable result
